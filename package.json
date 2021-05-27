@@ -1,0 +1,29 @@
+{
+  "name": "ejs_challenge",
+  "version": "1.0.0",
+  "description": "blog template using ejs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leonardmihael/blog.git"
+  },
+  "keywords": [
+    "ejs",
+    "blog",
+    "practice"
+  ],
+  "author": "Mihael LC",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leonardmihael/blog/issues"
+  },
+  "homepage": "https://github.com/leonardmihael/blog#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1"
+  }
+}
