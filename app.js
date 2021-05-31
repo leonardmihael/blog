@@ -32,25 +32,37 @@ const aboutContent = 'Sed ut perspiciatis unde omnis iste natus error sit volupt
 const contactContent = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus.';
 
 // 'index' page ------>
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
   res.render('home', {
     homeStartingContent: homeStartingContent
   });
 });
 
 // 'about' page -------->
-app.get('/about', function(req, res) {
+app.get('/about', (req, res) => {
   res.render('about', {
     aboutContent: aboutContent
   });
 });
 
 // 'contact' page --------->
-app.get('/contact', function(req, res) {
+app.get('/contact', (req, res) => {
   res.render('contact', {
     contactContent: contactContent
   });
 });
+
+// 'compose' page --------->
+app.get('/compose', (req, res) => {
+  res.render('compose');
+});
+
+// Access the parse results as req.body.postTitle and postBody at 'compose' page --------->
+app.post('/compose', (req, res) => {
+    console.log(req.body.postTitle, req.body.postBody);
+    res.sendStatus(200);
+});
+
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
