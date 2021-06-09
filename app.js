@@ -9,10 +9,13 @@ const app = express();
 const port = 3000;
 
 //require ejs
-let ejs = require('ejs');
+const ejs = require('ejs');
 
 //require bodyParser
-let bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
+
+//require lodash
+const _ = require('lodash');
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
@@ -21,7 +24,6 @@ app.use(bodyParser.urlencoded({
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
-
 
 //Static files are files that clients download as they are from the server. Create a new directory, public. Express, by default does not allow you to serve static files. You need to enable it using the following built-in middleware:
 app.use(express.static('public'));
@@ -32,14 +34,14 @@ const aboutContent = 'Sed ut perspiciatis unde omnis iste natus error sit volupt
 const contactContent = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus.';
 
 //Creating an empty array to store the post objects
-var posts = [];
+let posts = [];
 
 // 'index' page ------>
 app.get('/', (req, res) => {
   res.render('home', {
-    homeStartingContent: homeStartingContent
+    homeStartingContent: homeStartingContent,
+    posts: posts
   });
-    console.log(posts);
 });
 
 // 'about' page -------->
@@ -71,6 +73,16 @@ app.post('/compose', (req, res) => {
   res.redirect('/'); // redirect to home page
 });
 
+// Define route parameters (getting what is written after /posts/ )
+app.get('/posts/:postName', function(req, res) {
+  const requestedTitle = req.params.postName;
+  posts.forEach(function(post) {
+    const storedTitle = post.title;
+    if (_.lowerCase(requestedTitle) === _.lowerCase(storedTitle)) {
+      console.log('Match!');
+    }
+  });
+});
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
